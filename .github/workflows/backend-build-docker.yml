@@ -17,7 +17,7 @@ jobs:
           java-version: 1.13
           maven-version: 13
       - name: Build Maven
-        run: mvn -B package --file pom.xml
+        run: mvn -B package -Dmaven.test.skip=true --file pom.xml
       - name: Dockerhub login
         run: echo ${{ secrets.REGISTRY_PASSWORD }} | docker login -u ${{ secrets.REGISTRY_USER }} --password-stdin  
       - name: Set up Docker Buildx
