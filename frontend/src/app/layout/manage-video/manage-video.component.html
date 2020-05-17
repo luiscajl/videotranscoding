@@ -1,0 +1,70 @@
+<div [@routerTransition] *ngIf="canEvaluate">
+    <app-page-header [heading]="'Manage Videos'" [heading2]="originalVideo.name" [uriRedirect]="'/manage-videos'" [icon2]="'fa fa-file'"
+        [icon]="'fa fa-fw fa-list-ol'"></app-page-header>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card mb-3">
+                <div class="card-header">
+                    <strong>Original: </strong>{{originalVideo.name}}
+                </div>
+                <div class="row card-body">
+                    <div class="col-sm-6">
+                        <ul class="list-group">
+                            <li class="list-group-item">Size: {{originalVideo.fileSize}}</li>
+                            <li *ngIf="originalVideo.complete" class="list-group-item">Complete: Yes</li>
+                            <li *ngIf="!originalVideo.complete" class="list-group-item">Complete: No</li>
+                            <li *ngIf="!originalVideo.complete && originalVideo.active" class="list-group-item">Active: Yes</li>
+                            <li *ngIf="!originalVideo.complete && !originalVideo.active" class="list-group-item">Active: No</li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="btn-group-vertical btn-block">
+                            <button type="button" class="btn btn-danger">Delete Video</button>
+                            <button [disabled]="!canPlay(originalVideo)" (click)="watchVideo(originalVideo.originalId,originalVideo.originalId)" type="button"
+                                class="btn btn-success">Watch Video</button>
+                            <button (click)="downloadVideo(originalVideo.originalId)" type="button" class="btn btn-info">Download Video</button>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card mb-3" *ngFor="let conversion of originalVideo.conversions" [style.color]="getErrored(conversion) == true ? 'red' : null">
+                <div class="card-header">
+                    <strong>Conversion: </strong>{{conversion.name}}
+                    <br>
+                    <strong>Type: </strong>{{conversion.conversionType}}
+                </div>
+                <div class="row card-body">
+                    <div class="col-sm-6">
+                        <ul class="list-group">
+                            <li class="list-group-item">Size: {{conversion.fileSize}}</li>
+                            <li *ngIf="conversion.finished" class="list-group-item">Complete: Yes</li>
+                            <li *ngIf="!conversion.finished" class="list-group-item">Complete: No</li>
+                            <li *ngIf="!conversion.finished && conversion.active" class="list-group-item">Active: Yes</li>
+                            <li *ngIf="!conversion.finished && !conversion.active" class="list-group-item">Active: No</li>
+                            <li *ngIf="!conversion.finished" class="list-group-item">Progress: {{conversion.progress}}</li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6" *ngIf="conversion.finished">
+                        <div class="btn-group-vertical btn-block" >
+                            <button type="button" class="btn btn-danger">Delete Video</button>
+                            <button [disabled]="getErrored(conversion) || !canPlay(conversion)" (click)="watchVideo(originalVideo.originalId,conversion.conversionId)"
+                                type="button" class="btn btn-success">Watch Video</button>
+                            <button [disabled]="getErrored(conversion)" (click)="downloadVideo(conversion.conversionId)" type="button" class="btn btn-info">Download Video</button>
+                        </div>
+                    </div>
+                    <div class="col-sm-6" *ngIf="!conversion.finished">
+                        <div class="btn-group-vertical btn-block" >
+                            <button [disabled]="!conversion.finished" type="button" class="btn btn-danger">Delete Video</button>
+                            <button [disabled]="!conversion.finished" type="button" class="btn btn-success">Watch Video</button>
+                            <button [disabled]="!conversion.finished" type="button" class="btn btn-info">Download Video</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </div>
+</div>

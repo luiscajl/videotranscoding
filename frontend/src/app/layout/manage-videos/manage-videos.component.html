@@ -1,0 +1,45 @@
+<div [@routerTransition]>
+    <app-page-header [heading]="'Manage Videos'" [icon]="'fa fa-fw fa-list-ol'"></app-page-header>
+    <div class="row" infiniteScroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="800" (scrolled)="onScroll()">
+        <div class="col-lg-4" *ngFor="let original of originalVideos">
+            <div class="card mb-3">
+                <div class="card-header">
+                    <strong>{{original.name}}</strong>
+                </div>
+                <div class="row card-body">
+                    <div class="col-sm-6">
+                        <ul class="list-group">
+                            <li class="list-group-item">Size: {{original.fileSize}}</li>
+                            <li *ngIf="original.complete" class="list-group-item">Complete: Yes</li>
+                            <li *ngIf="!original.complete" class="list-group-item">Complete: No</li>
+                            <li *ngIf="!original.complete && original.active" class="list-group-item">Active: Yes</li>
+                            <li *ngIf="!original.complete && !original.active" class="list-group-item">Active: No</li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="btn-group-vertical btn-block">
+                            <button (click)="deleteVideo(original)" type="button" class="btn btn-danger">Delete</button>
+                            <button [disabled]="!canPlay(original)" type="button" class="btn btn-success" (click)="watchVideo(original.originalId,original.originalId)">Watch</button>
+                            <button type="button" class="btn btn-info" (click)="downloadVideo(original.originalId)">Download</button>
+                            <button type="button" (click)="goToConversion(original.originalId)" class="btn btn-warning">Conversions</button>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </div>
+    <div class="row" *ngIf="noVideos">
+            <div class="col-xl-3"></div>
+            <div class="col-xl-6">
+                <div class="alert alert-info">
+                    <strong>Oh!</strong> No videos on this moment.
+                </div>
+                <div class="wrapper">
+                    <button type="button" class="btn btn-primary center" [routerLink]="['/upload-videos']">Start here!</button>
+                </div>
+                <div class="col-xl-3"></div>
+            </div>
+        </div>
+</div>

@@ -1,0 +1,68 @@
+spring:
+    mustache:
+        suffix: .html
+    profiles:
+        active: dev
+    servlet:
+        multipart:
+            enabled: true
+            maxFileSize: -1
+            maxRequestSize: -1
+
+okta:
+    oauth2:
+        issuer: XXXXXXXXXXX
+        client-id: XXXXXXXXXX
+        client-secret: XXXXXXXXX           
+
+# spring.mvc.async.request-timeout = 360000000
+# server.connection-timeout=360000000
+# spring.datasource.tomcat.testOnBorrow=true 
+# spring.datasource.tomcat.validationQuery = SELECT 1
+#spring.jpa.show-sql=true
+#spring.jpa.properties.hibernate.format_sql=true
+#logging.level.org.hibernate.SQL=DEBUG
+#logging.level.org.hibernate.type.descriptor.sql.BasicBinder=TRACE
+#spring.jpa.properties.hibernate.show_sql=true
+#spring.jpa.properties.hibernate.use_sql_comments=true
+#spring.jpa.properties.hibernate.type=trace 
+#spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MariaDB53Dialect
+
+
+### TRACE            
+ffmpeg:
+    argument:
+        notFound: The argument {} not is for this service.
+    command:
+        to:
+            send: The command send is {}.
+    conversion:
+        end: Conversion finished for the video {}.
+        start: 'Conversion started for the video {}. '
+    conversionType:
+        notFound: 'Conversion type for the video {} not found and can`t save original
+            videos. '
+    exception:
+        executor:
+            service: The executor service throw an exception.
+    fileOriginal:
+        exists: The file {} exits in the path of the filesystem.
+    folderOuput:
+        nullOrEmpty: Folder for the output for files is empty or null
+    folderOutput:
+        notExits: 'Folder for the output for files not exists: {}.'
+    interrupt:
+        exception: The current thread to convert the video has been interrupt for
+            other that was waiting.
+    io:
+        exception:
+            exec: The command {} not execute correctly.
+            readLine: Line failed to read on the method.
+    ioException:
+        general: 'Exception for IO. The cause is: '
+    noVideoFile: The file {} is not a video file.
+    notFound: FFmpeg not found on {}.
+    nullOrEmpty: FFmpeg path is null or empty.
+    originalVideo:
+        notSave: Original Video {0} is not save on the computer
+        'null': Original Video is null and can not continue with the conversion            

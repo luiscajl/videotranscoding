@@ -1,0 +1,29 @@
+li.active {
+    cursor: pointer; 
+    background-color: #111b1f;
+    border-color:#111b1f;
+    color: 	#fff
+}
+li.active:hover {
+    cursor: pointer; 
+    color:#F7CE3E;
+}
+li{
+    background-color:#1A2930;
+    border-color:#1A2930;
+    color:#999
+}
+li:hover{
+    color:#F7CE3E;
+    background-color:#111b1f;
+    border-color:#111b1f;
+}
+
+
+.btn-info{
+    background-color:#1A2930;
+    border-color:#1A2930;
+}
+.btn-info:hover{
+    color:#F7CE3E
+}

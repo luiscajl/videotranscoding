@@ -1,0 +1,25 @@
+version: '3'
+services:
+  videotranscoding-mysql:
+    image: mariadb:10.5
+    container_name: videotranscoding-mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=lavanda
+      - MYSQL_DATABASE=videotranscoding 
+  videotranscoding-backend:
+    depends_on:
+      - videotranscoding-mysql
+    image: luiscajl/videotranscoding:latest
+    container_name: videotranscoding-backend
+    links:
+      - videotranscoding-mysql:videotranscoding-mysql
+    ports: 
+      - 3344:8443
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://videotranscoding-mysql:3306/videotranscoding
+  videotranscoding-frontend:
+    image: luiscajl/videotranscoding-frontend:latest
+    container_name: videotranscoding-frontend
+    ports:
+      - 80:80
+

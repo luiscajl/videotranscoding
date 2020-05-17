@@ -1,0 +1,25 @@
+security:
+    require-ssl: false
+server:
+    http2:
+        enabled: false
+    port: 8080
+
+path:
+    ffmpeg:
+        centos: /Users/luisca/Documents/TFM/ffmpeg
+        linux: /Users/luisca/Documents/TFM/ffmpeg
+        macosx: /Users/luisca/Documents/TFM/ffmpeg
+    folder:
+        original: /Users/luisca/Documents/TFM/Pruebas_FFMPEG/original/
+        ouput: /Users/luisca/Documents/TFM/Pruebas_FFMPEG/transcoded/
+spring:
+    datasource:
+        driverClassName: org.h2.Driver
+        password: password
+        url: jdbc:h2:mem:testdb
+        username: sa
+    jpa:
+        database-platform: org.hibernate.dialect.H2Dialect
+        hibernate:
+            ddl-auto: create-drop

@@ -1,0 +1,30 @@
+security:
+    require-ssl: true
+server:
+    http2:
+        enabled: true
+    port: 8443
+    ssl:
+        enabled: true
+        key-password: lavanda
+        key-store: classpath:keystore/sslcertificatelavanda.p12
+        key-store-password: lavanda
+
+path:
+    ffmpeg:
+        centos: /usr/bin/ffmpeg
+        linux: /usr/bin/ffmpeg
+        macosx: /usr/local/Cellar/ffmpeg/3.4/bin/ffmpeg
+    folder:
+        original: /tmp/VideoTranscoding/videos/original/
+        ouput: /tmp/VideoTranscoding/videos/transcoded/
+spring:
+    datasource:
+        driverClassName: org.h2.Driver
+        password: password
+        url: jdbc:h2:mem:testdb
+        username: sa
+    jpa:
+        database-platform: org.hibernate.dialect.H2Dialect
+        hibernate:
+            ddl-auto: create-drop

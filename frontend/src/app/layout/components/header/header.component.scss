@@ -1,0 +1,34 @@
+$topnav-background-color: #1A2930;
+:host {
+    .navbar {
+        background-color: $topnav-background-color;
+        .navbar-brand {
+            color: #fff;
+        }
+        .nav-item > a {
+            color: #C5C1C0;
+            &:hover {
+                color: #F7CE3E;
+            }
+        }
+    }
+}
+
+a {
+    cursor: pointer; 
+    outline:0;
+}
+.btn-success{
+    background-color:#1A2930;
+    border-color:#1A2930;
+}
+.btn-success:hover{
+    color:#fff
+}
+.btn-danger{
+    background-color:#b82601;
+    border-color:#b82601;
+}
+.btn-danger:hover{
+    color:#fff
+}

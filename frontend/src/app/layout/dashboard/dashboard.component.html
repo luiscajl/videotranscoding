@@ -1,0 +1,80 @@
+<div [@routerTransition]>
+    <h2 class="text-muted">Dashboard </h2>
+    <div class="row" *ngIf="onConversion && !loading">
+        <div class="col-lg-12">
+            <div class="card mb-3">
+                <div class="card-header">Conversion in Progress -
+                    <strong>{{originalOnProgress.name}}</strong>
+                </div>
+                <div class="card-body table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Conversion Type</th>
+                                <th>% Complete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr [class.table-danger]="getErrored(conversion)" [class.table-success]="conversion.finished" [class.table-warning]="conversion.conversionId == conversionOnProgress.conversionId"
+                                *ngFor="let conversion of originalOnProgress.conversions">
+                                <td>{{conversion.name}}</td>
+                                <td>{{conversion.conversionType}}</td>
+                                <td>{{conversion.progress}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>
+                        <ngb-progressbar id="progressBarDashboard" type="warning" [value]="conversionOnProgress.progress" [striped]="true" [animated]="true">
+                            <i>{{conversionOnProgress.progress}}</i>
+                        </ngb-progressbar>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </div>
+    <div class="row mb-12" *ngIf="onConversion && !loading">
+        <div class="col col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <strong>Original Video - </strong>{{originalOnProgress.name}}
+                    <br>
+                    <button [disabled]="!canPlay(originalOnProgress)" (click)="watchVideo(originalOnProgress.originalId,originalOnProgress.originalId)"
+                        type="button" class="btn btn-sm btn-success">Watch</button>
+                    <button (click)="downloadVideo(originalOnProgress.originalId)" type="button" class="btn btn-sm btn-info">Download</button>
+                </div>
+                <div class="card-body">
+                    <div *ngFor="let conversion of originalOnProgress.conversions">
+                        <ul *ngIf="conversion.finished" class="list-group">
+                            <li class="list-group-item">
+                                <strong>Conversion -</strong>{{ conversion.name }}
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Type: </strong>{{conversion.conversionType}}
+                            </li>
+                            <li class="list-group-item">
+                                <button [disabled]="!canPlay(conversion) || getErrored(conversion)" (click)="watchVideo(originalOnProgress.originalId,conversion.conversionId)"
+                                    type="button" class="btn btn-sm btn-success">Watch</button>
+                                <button (click)="downloadVideo(conversion.conversionId)" type="button" class="btn btn-sm btn-info">Download</button>
+                            </li>
+                            <hr>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" *ngIf="!onConversion && !loading">
+        <div class="col-xl-3"></div>
+        <div class="col-xl-6">
+            <div class="alert alert-info">
+                <strong>Oh!</strong> No conversion on this moment.
+            </div>
+            <div class="wrapper">
+                <button type="button" class="btn btn-primary center" [routerLink]="['/upload-videos']">Start here!</button>
+            </div>
+            <div class="col-xl-3"></div>
+        </div>
+    </div>
+</div>

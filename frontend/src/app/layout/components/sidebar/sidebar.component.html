@@ -1,0 +1,75 @@
+<nav class="sidebar" [ngClass]="{sidebarPushRight: isActive}">
+    <div class="list-group">
+        <a routerLink="/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-dashboard"></i>&nbsp;Dashboard
+        </a>
+        <a [routerLink]="['/upload-videos']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-upload"></i>&nbsp;Upload Videos
+        </a>
+        <a [routerLink]="['/manage-videos']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-list-ol"></i>&nbsp;Manage Videos
+        </a>
+        <div class="header-fields">
+
+            <a class="list-group-item">
+                *MKV videos can not be played
+            </a>
+            <a (click)="rltAndLtr()" class="list-group-item">
+                <span>
+                    <i class="fa fa-arrows-h"></i>&nbsp; Rtl/Ltr</span>
+            </a>
+            <div class="nested-menu">
+                <a class="list-group-item" (click)="addExpandClass('profile')">
+                    <span>
+                        <i class="fa fa-user"></i>&nbsp; Userrrr</span>
+                </a>
+                <li class="nested" [class.expand]="showMenu === 'profile'">
+                    <ul class="submenu">
+                        <li>
+                            <a id="listItems" class="list-group-item" (click)="open(content)">
+
+                                <i class="fa fa-fw fa-user"></i> Edit Profile
+                            </a>
+                        </li>
+                        <li>
+                            <a id="listItems"  class="list-group-item" (click)="onLoggedout()">
+
+                                <i class="fa fa-fw fa-power-off"></i> Log Out
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </div>
+        </div>
+    </div>
+</nav>
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Edit Profile</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <form [formGroup]="editProfile" (ngSubmit)="onSubmit(editProfile)">
+        <div class="modal-body">
+            <div class="form-group">
+                <input type="text" id="nick" formControlName="nick" name="nick" class="form-control input-underline input-lg" placeholder="Userrrr">
+            </div>
+            <div class="form-group">
+                <input type="text" id="nick" formControlName="email" name="email" class="form-control input-underline input-lg" placeholder="{{userLogged.email}}">
+            </div>
+            <div class="form-group">
+                <input type="password" formControlName="hashedPassword" id="password" name="password" class="form-control input-underline input-lg"
+                    placeholder="Mandatory Password">
+            </div>
+            <div class="form-group">
+                <input type="password" formControlName="passwordRepeat" id="password" name="password" class="form-control input-underline input-lg"
+                    placeholder="Repeat Password">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-success" [disabled]="editProfile.invalid">Update</button>
+            <button type="button" class="btn btn-danger" (click)="c('Close click')">Close</button>
+        </div>
+    </form>
+</ng-template>

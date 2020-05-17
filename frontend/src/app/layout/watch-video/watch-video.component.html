@@ -1,0 +1,42 @@
+<div [@routerTransition] *ngIf="canEvaluate">
+  <app-page-header [heading]="'Manage Videos'" [icon]="'fa fa-fw fa-list-ol'" [heading2]="originalVideo.name" [uriRedirect]="'/manage-videos'"
+    [icon2]="'fa fa-film'"></app-page-header>
+  <div class="row mb-3">
+    <div class="col col-sm-2">
+      <div class="card">
+        <button (click)="backToLocation()" type="button" class="btn btn-info">Back</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row mb-3" *ngIf="currentItemWatching.video!=null">
+  <div class="col col-sm-12">
+    <div class="card">
+      <div class="card-header">
+        <strong>Playing - </strong>
+        {{currentItemWatching.video.name}}
+      </div>
+      <div class="card-body">
+        <vg-player (onPlayerReady)="onPlayerReady($event)">
+          <video [vgMedia]="media" #media id="singleVideo" preload="auto" [src]="currentItemWatching.src" type="video/mp4" controls></video>
+        </vg-player>
+      </div>
+      <div>
+        <ul class="list-group">
+          <li (click)="changeSource(originalVideo.originalId)" class="list-group-item" [style.cursor]="!canPlay(originalVideo) == true ? 'default' : 'pointer'" [style.color]="!canPlay(originalVideo) == true ? 'red' : null"
+            [class.active]="originalVideo.originalId == currentItemWatching.video.originalId">
+            <strong>Original: </strong>
+            <a >{{originalVideo.name}}</a>
+          </li>
+          <li *ngFor="let conversion of conversions" (click)="changeSource(conversion.conversionId)" [style.cursor]=" (getErrored(conversion) || !canPlay(conversion))== true ? 'default' : 'pointer'"
+            [style.color]="(getErrored(conversion) || !canPlay(conversion)) == true ? 'red' : null" [class.active]="conversion.conversionId == currentItemWatching.video.conversionId"
+            class="list-group-item">
+            <strong>Conversion: </strong>
+            <a >{{ conversion.name }}</a>
+            <strong>Type: </strong>{{conversion.conversionType}}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,77 @@
+<nav class="navbar navbar-expand-lg fixed-top">
+    &nbsp;
+    <a [routerLink]="['/dashboard']">
+        <img alt="VideoTranscoding" class="img-responsive logo_navbar"
+            src="assets/images/VideoTranscoding_white_mini_logo.png" width="40px">
+    </a> &nbsp; &nbsp;
+    <a [routerLink]="['/dashboard']" class="navbar-brand">
+        VideoTranscoding
+    </a>
+    <button class="navbar-toggler" type="button" (click)="toggleSidebar()">
+        <!-- <span class="navbar-toggler-icon"></span> -->
+        <i class="fa fa-bars text-muted" aria-hidden="true"></i>
+    </button>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto">
+            &nbsp;
+            <li class="nav-item">
+                <a class="nav-link mt-1" style="padding: 0.375rem 1rem !important; border-color: #999;">
+                    *MKV videos can not be played
+                </a>
+            </li> &nbsp;
+            <li class="nav-item">
+                <a class="nav-link mt-1" style="padding: 0.375rem 1rem !important; border-color: #999;"
+                    (click)="rltAndLtr()">
+                    Rtl/Ltr
+                </a>
+            </li> &nbsp;
+            <li class="nav-item dropdown" ngbDropdown placement="bottom-right">
+                <a href="javascript:void(0)" class="nav-link" ngbDropdownToggle>
+                    <i class="fa fa-user"></i> USerrr
+                    <b class="caret"></b>
+                </a>
+                <div class="dropdown-menu-right" ngbDropdownMenu>
+                    <a class="dropdown-item" (click)="open(content)">
+                        <i class="fa fa-fw fa-user"></i>Edit Profile
+
+                    </a>
+                    <a class="dropdown-item" (click)="onLoggedout()">
+                        <i class="fa fa-fw fa-power-off"></i>Log Out
+                    </a>
+                </div>
+            </li>&nbsp;&nbsp;
+        </ul>
+    </div>
+</nav>
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Edit Profile</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <form [formGroup]="editProfile" (ngSubmit)="onSubmit(editProfile)">
+        <div class="modal-body">
+            <div class="form-group">
+                <input type="text" id="nick" formControlName="nick" name="nick"
+                    class="form-control input-underline input-lg" placeholder="USerrr">
+            </div>
+            <div class="form-group">
+                <input type="text" id="nick" formControlName="email" name="email"
+                    class="form-control input-underline input-lg" placeholder="USerrr">
+            </div>
+            <div class="form-group">
+                <input type="password" formControlName="hashedPassword" id="password" name="password"
+                    class="form-control input-underline input-lg" placeholder="Mandatory Password">
+            </div>
+            <div class="form-group">
+                <input type="password" formControlName="passwordRepeat" id="password" name="password"
+                    class="form-control input-underline input-lg" placeholder="Repeat Password">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-success" [disabled]="editProfile.invalid">Update</button>
+            <button type="button" class="btn btn-danger" (click)="c('Close click')">Close</button>
+        </div>
+    </form>
+</ng-template>
