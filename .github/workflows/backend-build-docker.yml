@@ -32,7 +32,7 @@ jobs:
           docker buildx build \
           --platform linux/amd64,linux/arm64 \
             --output "type=image,push=true" \
-            --tag "luiscajl/videotranscoding-backend:${GITHUB_SHA::8} \
+            --tag "luiscajl/videotranscoding-backend:${GITHUB_SHA::8}" \
             --file dockerfiles/Dockerfile .     
       - name: Docker Check Manifest
         if: always() && startsWith(github.ref, 'refs/tags/')
