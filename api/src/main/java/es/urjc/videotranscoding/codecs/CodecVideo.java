@@ -63,6 +63,7 @@ public enum CodecVideo {
 	 * 
 	 */
 	H264_360(" -c:v libx264 -vf scale=640:-2 -crf 18 -preset slow ");
+	
 	private final String codecVideoType;
 
 	CodecVideo(String x) {
