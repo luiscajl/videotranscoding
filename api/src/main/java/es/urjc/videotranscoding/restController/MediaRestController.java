@@ -42,7 +42,7 @@ import es.urjc.videotranscoding.utils.FileWatcher;
 @RestController
 @RequestMapping(value = "/media")
 // @Api(tags = "Media Api Operations")
-@CrossOrigin({ "http://localhost:4200", "https://lavandadelpatio.online" })
+@CrossOrigin({ "http://localhost:4200", "https://old.videotranscoding.es" })
 
 public class MediaRestController {
 	@Autowired
@@ -66,8 +66,7 @@ public class MediaRestController {
 	// @ApiOperation(value = "All OriginalVideos on the Api with their conversions")
 	@GetMapping(value = "")
 	@JsonView(Basic.class)
-	public ResponseEntity<List<Original>> getAllVideoConversions(@AuthenticationPrincipal OidcUser user,
-			Pageable pageable) {
+	public ResponseEntity<List<Original>> getAllVideoConversions(Principal principal, Pageable pageable) {
 		Page<Original> allOriginalVideos = originalService.findAll(pageable);
 		if (allOriginalVideos == null || allOriginalVideos.getContent().size() == 0) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -75,7 +74,6 @@ public class MediaRestController {
 		return new ResponseEntity<List<Original>>(allOriginalVideos.getContent(), HttpStatus.OK);
 
 	}
-	
 
 	/**
 	 * Original Video
@@ -86,9 +84,8 @@ public class MediaRestController {
 	// @ApiOperation(value = "Get videos information for id")
 	@GetMapping(value = "/{id}")
 	@JsonView(Details.class)
-	public ResponseEntity<Object> getOriginalVideo(@PathVariable long id, @AuthenticationPrincipal OidcUser user)
-			throws FFmpegException {
-		Object video = originalService.findOneVideo(id, "Paco");
+	public ResponseEntity<Object> getOriginalVideo(@PathVariable long id, Principal principal) throws FFmpegException {
+		Object video = originalService.findOneVideo(id, principal.getName());
 		if (video == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 

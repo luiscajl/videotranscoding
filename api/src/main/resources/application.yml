@@ -11,9 +11,9 @@ spring:
 
 okta:
     oauth2:
-        issuer: XXXXXXXXXXX
-        client-id: XXXXXXXXXX
-        client-secret: XXXXXXXXX           
+        issuer: xxxx
+        client-id: xxxx
+        client-secret: xxxx          
 
 # spring.mvc.async.request-timeout = 360000000
 # server.connection-timeout=360000000

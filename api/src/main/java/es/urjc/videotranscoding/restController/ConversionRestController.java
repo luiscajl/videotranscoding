@@ -35,7 +35,7 @@ import es.urjc.videotranscoding.service.OriginalService;
 @RestController
 @RequestMapping(value = "/conversion")
 // @Api(tags = "Conversion Operations")
-@CrossOrigin({ "http://localhost:4200", "https://lavandadelpatio.online" })
+@CrossOrigin({ "http://localhost:4200", "https://old.videotranscoding.es" })
 public class ConversionRestController {
 
 	@Autowired
@@ -79,10 +79,10 @@ public class ConversionRestController {
 	// conversion type")
 	// @JsonView(Details.class)
 	public ResponseEntity<Object> addConversionBasic(@RequestParam(value = "file") MultipartFile file,
-			@RequestParam(value = "conversionType") List<String> conversionList, @AuthenticationPrincipal OidcUser user)
+			@RequestParam(value = "conversionType") List<String> conversionList, Principal principal)
 			throws FFmpegException {
 
-		Original original = originalService.addOriginalBasic("Paco", file, conversionList);
+		Original original = originalService.addOriginalBasic(principal.getName(), file, conversionList);
 		videoTranscodingService.transcodeVideo(original);
 		return new ResponseEntity<>(original, HttpStatus.CREATED);
 	}
@@ -121,12 +121,13 @@ public class ConversionRestController {
 	// conversion type")
 	// @JsonView(Details.class)
 	public ResponseEntity<Original> addConversionExpert(@RequestParam(value = "conversionType") List<String> params,
-			@RequestParam(value = "file") MultipartFile file, @AuthenticationPrincipal OidcUser user) throws FFmpegException {
+			@RequestParam(value = "file") MultipartFile file, Principal principal) throws FFmpegException {
 		// User u = userService.findOneUser(principal.getName());
 		// if (u == null) {
 		// return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 		// }
-		Original original = originalService.addOriginalExpert("Pacooo", file, params);
+		Original original = originalService.addOriginalExpert(principal.getName(), file, params);
+		params.forEach(System.out::println);
 		videoTranscodingService.transcodeVideo(original);
 		return new ResponseEntity<>(original, HttpStatus.CREATED);
 	}

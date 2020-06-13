@@ -24,7 +24,7 @@ public class StreamGobbler implements Runnable {
 	private static final String TRACE_STARTING_CONVERSION = "ffmpeg.conversion.start";
 	private static final String TRACE_FINISH_CONVERSION = "ffmpeg.conversion.end";
 	private static final String TRACE_IO_EXCEPTION_READ_LINE = "ffmpeg.io.exception.readLine";
-	private static Double finalTime;
+	private double finalTime = 0;
 	private final String GENERAL_PATTERN = ".*size= *(\\d+)kB.*time= *(\\d\\d):(\\d\\d):(\\d\\d\\.\\d\\d).*bitrate= *(\\d+\\.\\d)+kbits\\/s.*speed=*(\\d+.\\d+)x.*";
 	private final String PROGRESS_VIDEO_PATTERN = "(?<=time=)[\\d:.]*";
 	private final String DURATION_VIDEO_PATTERN = "(?<=Duration: )[^,]*";
@@ -88,7 +88,7 @@ public class StreamGobbler implements Runnable {
 				}
 				while (durationVideoMatcher.find()) {
 					finalTime = getDuration(durationVideoMatcher.group(0));
-					setDuration(String.valueOf(finalTime));
+					setDuration(String.valueOf(getDuration(durationVideoMatcher.group(0))));
 				}
 				while (generalMatcher.find()) {
 					setFileSize(generalMatcher.group(1));
