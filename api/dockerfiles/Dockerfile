@@ -1,7 +1,7 @@
 FROM adoptopenjdk:13.0.2_8-jre-hotspot
 
-RUN apt install -y software-properties-common
 RUN apt update
+RUN apt install -y software-properties-common
 RUN add-apt-repository -y ppa:jonathonf/ffmpeg-4
 RUN apt install -y ffmpeg
 RUN ffmpeg -version
