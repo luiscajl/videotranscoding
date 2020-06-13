@@ -42,10 +42,8 @@ public class ConversionTypeBasic {
 		switch (conversion) {
 			case MOVIL:
 				return MOVIL;
-
 			case WEB:
 				return WEB;
-
 			case VLC:
 				return VLC;
 			case ALL:
