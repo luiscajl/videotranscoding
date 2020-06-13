@@ -24,6 +24,7 @@ public enum CodecAudio {
 	 * Copy Audio
 	 */
 	COPY(" -c:a copy ");
+	
 	private final String codecAudioType;
 
 	CodecAudio(String x) {
