@@ -33,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().requestMatchers(CorsUtils::isPreFlightRequest).permitAll().anyRequest().authenticated()
+        http.authorizeRequests().requestMatchers(CorsUtils::isPreFlightRequest).permitAll().regexMatchers("/actuator/health").permitAll().anyRequest().authenticated()
                 .and().oauth2Login().and().oauth2ResourceServer().jwt();
 
         // http.requiresChannel()
@@ -45,6 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.headers().contentSecurityPolicy("script-src 'self'; report-to /csp-report-endpoint/");
     }
+    
 
     // @Bean
     // public FilterRegistrationBean corsFilter() {
