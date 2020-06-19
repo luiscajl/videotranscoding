@@ -20,7 +20,7 @@ jobs:
           npm install 
       - name: Npm build prod 
         run: |   
-          npm run build -c production
+          npm run build 
       - name: Dockerhub login
         run: echo ${{ secrets.REGISTRY_PASSWORD }} | docker login -u ${{ secrets.REGISTRY_USER }} --password-stdin
       - name: Set up Docker Buildx

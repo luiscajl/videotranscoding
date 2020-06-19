@@ -4,7 +4,7 @@
   "license": "Apache",
   "scripts": {
     "ng": "ng",
-    "build": "ng build",
+    "build": "ng build -c production",
     "start": "ng serve",
     "test": "ng test",
     "lint": "tslint ./src/**/*.ts -t verbose",
