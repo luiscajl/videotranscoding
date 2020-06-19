@@ -46,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.headers().contentSecurityPolicy("script-src 'self'; report-to /csp-report-endpoint/");
     }
     
-
+    
     // @Bean
     // public FilterRegistrationBean corsFilter() {
     //     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

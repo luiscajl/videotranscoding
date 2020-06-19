@@ -3,7 +3,6 @@ import { Location } from '@angular/common';
 import { routerTransition } from '../../router.animations';
 import { MediaService } from '../../shared/services/media.service';
 import { Original } from '../../shared/models/original.model';
-import * as globals from '../../globals';
 import { Conversion } from '../../shared/models/conversion.model';
 import { VgAPI } from 'ngx-videogular';
 import { ActivatedRoute } from '@angular/router';

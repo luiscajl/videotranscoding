@@ -1,5 +1,5 @@
+import { environment } from './../environments/environment';
 import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
-import { DashboardComponent } from './layout/dashboard/dashboard.component';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
@@ -16,11 +16,10 @@ import { MediaService } from './shared/services/media.service';
 
 import { OKTA_CONFIG, OktaAuthModule } from '@okta/okta-angular';
 
-
 const oktaConfig = {
-    issuer: 'XXXXXXXX',
+    issuer: environment.oktaIssuer,
     redirectUri: window.location.origin + '/implicit/callback',
-    clientId: 'XXXXXXXX',
+    clientId: environment.oktaClientId,
     scopes: ['openid', 'profile']
 };
 @NgModule({
@@ -42,6 +41,9 @@ const oktaConfig = {
         UserService,
         MediaService,
         UploadFileService,
+        { provide: 'BACKEND_API_URL', useValue: environment.apiUrl},
+        { provide: 'OKTA_CLIENT_ID', useValue: environment.oktaClientId },
+        { provide: 'OKTA_ISSUER', useValue: environment.oktaIssuer },
         { provide: OKTA_CONFIG, useValue: oktaConfig },
         { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
     bootstrap: [AppComponent]

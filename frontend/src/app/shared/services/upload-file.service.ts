@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpEvent, HttpClient, HttpRequest } from '@angular/common/http';
 
-import * as globals from '../../globals';
 import { FormGroup } from '@angular/forms';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class UploadFileService {
@@ -14,13 +14,13 @@ export class UploadFileService {
     let formdata: FormData = new FormData();
     formdata.append('file', file, file.name);
     formdata.append('conversionType', form.get('conversionType').value);
-    return this.sendConversion(globals.CONVERSION_EXPERT_URL, formdata);
+    return this.sendConversion(environment.apiUrl+'conversion/expert', formdata);
   }
   uploadFileBasic(form: FormGroup, file: File): Observable<any> {
     let formdata: FormData = new FormData();
     formdata.append('file', file, file.name);
     formdata.append('conversionType', form.get('conversionType').value);
-    return this.sendConversion(globals.CONVERSION_BASIC_URL, formdata);
+    return this.sendConversion(environment.apiUrl+'conversion/basic', formdata);
 
   }
 
