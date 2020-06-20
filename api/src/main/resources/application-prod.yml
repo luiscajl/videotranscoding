@@ -1,16 +1,5 @@
-security:
-    require-ssl: true
 server:
-    http2:
-        enabled: true
-    port: 8443
-    ssl:
-        enabled: true
-        key-password: lavanda
-        key-store: classpath:keystore/sslcertificatelavanda.p12
-        key-store-password: lavanda
-
-
+    port: 8080
 path:
     ffmpeg:
         centos: /usr/bin/ffmpeg
