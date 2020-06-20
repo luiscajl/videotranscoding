@@ -41,9 +41,6 @@ const oktaConfig = {
         UserService,
         MediaService,
         UploadFileService,
-        { provide: 'BACKEND_API_URL', useValue: environment.apiUrl},
-        { provide: 'OKTA_CLIENT_ID', useValue: environment.oktaClientId },
-        { provide: 'OKTA_ISSUER', useValue: environment.oktaIssuer },
         { provide: OKTA_CONFIG, useValue: oktaConfig },
         { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
     bootstrap: [AppComponent]

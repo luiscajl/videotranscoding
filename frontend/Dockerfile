@@ -1,12 +1,14 @@
 FROM nginx:1.18
 
 RUN rm -rf /usr/share/nginx/html/*
-
-COPY /dist/* /usr/share/nginx/html
+COPY /dist/* /usr/share/nginx/html/
 
 COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
-RUN echo "mainFileName=\"\$(ls /usr/share/nginx/html/main*.js)\" && \ 
-          envsubst '\$BACKEND_API_URL \$OKTA_CLIENT_ID \$OKTA_ISSUER' < \${mainFileName} > main.tmp && \ 
-          mv main.tmp \${mainFileName} && nginx -g 'daemon off;'" > run.sh
-ENTRYPOINT ["sh", "run.sh"]          
+
+COPY ./entrypoint.sh /
+RUN chmod +x entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
+
+CMD ["nginx", "-g", "daemon off;"]
