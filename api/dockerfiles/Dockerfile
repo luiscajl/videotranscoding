@@ -14,7 +14,7 @@ RUN chmod -R 777 /tmp/VideoTranscoding/videos/transcoded/
 
 #Config APP
 COPY target/*.jar app.jar
-EXPOSE 8443
+EXPOSE 8080
 
 
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-Dspring.profiles.active=dev","-jar","app.jar"]
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","app.jar"]

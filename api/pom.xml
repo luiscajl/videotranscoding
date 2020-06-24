@@ -90,11 +90,12 @@
 			<version>${commons-fileupload.version}</version>
 		</dependency> -->
 		<!-- ====================================================================== -->
-		<!-- ================================ MYSQL =============================== -->
+		<!-- =========================== POSTGRESQL =============================== -->
 		<!-- ====================================================================== -->
 		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.2.14</version>
 		</dependency>
 		<!-- ====================================================================== -->
 		<!-- ============================= H2-Database ============================ -->

@@ -10,7 +10,19 @@ path:
         ouput: /tmp/VideoTranscoding/videos/transcoded/
 spring:
     datasource:
-        driver-class-name: com.mysql.jdbc.Driver
-        password: xxxx
-        url: jdbc:mysql://mysql-service:3306/videotranscoding?autoReconnect=true&useSSL=false
-        username: xxxx
+        # driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:postgresql://192.168.3.145:5432/postgres?autoReconnect=true
+        username: root
+        password: 1234
+    jpa:
+        database: postgresql
+        open-in-view: true
+        properties:
+          hibernate:
+            globally_quoted_identifiers: true
+            show_sql: false
+            use_sql_comments: true
+            format_sql: true
+            ddl-auto: none
+            dialect: org.hibernate.dialect.PostgreSQL95Dialect        
+            
