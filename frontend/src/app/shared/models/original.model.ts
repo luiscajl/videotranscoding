@@ -2,7 +2,7 @@ import { User } from './user.model';
 import { Conversion } from './conversion.model';
 
 export interface Original {
-    originalId: number;
+    id: number;
     name: string;
     path: string;
     userVideo: User;

@@ -38,8 +38,8 @@ export class ManageVideoComponent {
     watchVideo(idRedirect: number, idWatchRedirect: number) {
         this.router.navigate(['/watch-video/' + idRedirect], { queryParams: { idWatch: idWatchRedirect } });
     }
-    downloadVideo(originalIdDownload: number) {
-        this.mediaService.downloadById(originalIdDownload);
+    downloadVideo(idDownload: number) {
+        this.mediaService.downloadById(idDownload);
     }
     getErrored(conversion: Conversion): boolean {
         return this.mediaService.getErroredOnConversion(conversion);

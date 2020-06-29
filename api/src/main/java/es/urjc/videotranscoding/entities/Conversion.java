@@ -2,10 +2,12 @@ package es.urjc.videotranscoding.entities;
 
 import java.io.File;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -14,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import es.urjc.videotranscoding.codecs.ConversionType;
 
 @Entity
-@Table(name = "conversion")
+@Table(name = "conversion",schema = "videotranscoding")
 public class Conversion {
 	public interface Basic {
 	}
@@ -26,9 +28,9 @@ public class Conversion {
 	 * Id for the conversionId
 	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@JsonView(Basic.class)
-	private long conversionId;
+	private Integer id;
 	/**
 	 * Name of the video
 	 */
@@ -63,11 +65,13 @@ public class Conversion {
 	 * Type of conversion for this video
 	 */
 	@JsonView(Basic.class)
+	@Column(name = "conversion_type")
 	private ConversionType conversionType;
 	/**
 	 * 
 	 */
 	@ManyToOne
+	@JoinColumn(name = "original_id", referencedColumnName = "id", nullable = false)
 	private Original parent;
 
 	/**
@@ -165,8 +169,8 @@ public class Conversion {
 		this.fileSize = fileSize;
 	}
 
-	public long getConversionId() {
-		return conversionId;
+	public Integer getConversionId() {
+		return id;
 	}
 
 	public Original getParent() {

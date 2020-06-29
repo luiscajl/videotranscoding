@@ -39,7 +39,7 @@ public class OriginalRepositoryTest {
 	@Disabled
 	public void repositoryCheckOriginal() {
 		try {
-			Optional<Original> originalFind = originalRepository.findById(original.getOriginalId());
+			Optional<Original> originalFind = originalRepository.findById(original.getId());
 			if (originalFind.isPresent()) {
 				assertEquals(originalFind.get().getName(), original.getName());
 				assertEquals(originalFind.get().getPath(), original.getPath());
@@ -55,7 +55,7 @@ public class OriginalRepositoryTest {
 	@Disabled
 	public void repositoryEditOriginal() {
 		try {
-			Optional<Original> originalFind = originalRepository.findById(original.getOriginalId());
+			Optional<Original> originalFind = originalRepository.findById(original.getId());
 			if (originalFind.isPresent()) {
 				originalFind.get().setName("New name");
 				originalFind.get().setPath("New path");

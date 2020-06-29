@@ -84,7 +84,7 @@ public class MediaRestController {
 	// @ApiOperation(value = "Get videos information for id")
 	@GetMapping(value = "/{id}")
 	@JsonView(Details.class)
-	public ResponseEntity<Object> getOriginalVideo(@PathVariable long id, Principal principal) throws FFmpegException {
+	public ResponseEntity<Object> getOriginalVideo(@PathVariable Integer id, Principal principal) throws FFmpegException {
 		Object video = originalService.findOneVideo(id, principal.getName());
 		if (video == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -105,7 +105,7 @@ public class MediaRestController {
 	@JsonView(Details.class)
 	// @ApiOperation(value = "Delete Original or conversion with the id")
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Original> deleteVideos(@PathVariable long id, @AuthenticationPrincipal OidcUser user) {
+	public ResponseEntity<Original> deleteVideos(@PathVariable Integer id, @AuthenticationPrincipal OidcUser user) {
 
 		Original video = originalService.findOneVideo(id, user.getName());
 		Optional<Conversion> conversion = conversionService.findOneConversion(id);
@@ -144,7 +144,7 @@ public class MediaRestController {
 	@GetMapping(value = "/{id}/content")
 	public ResponseEntity<Original> downloadDirectFilm(
 			@RequestParam(value = "forceSave", required = true) boolean forceSave, HttpServletResponse response,
-			HttpServletRequest request, @PathVariable long id) throws FFmpegException {
+			HttpServletRequest request, @PathVariable Integer id) throws FFmpegException {
 		if (forceSave) {
 			Optional<Original> video = originalService.findOneVideoWithoutSecurity(id);
 			if (!video.isPresent()) {

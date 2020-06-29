@@ -130,14 +130,14 @@ public class VideoTranscodingFFmpegImpl implements VideoTranscodingService {
 		}
 		// String pathFFmpeg = getPathOfProgram();
 		// TODO: Check this method to optimize it
-		String pathFFmpeg = "/Users/luisca/Documents/TFM/Pruebas_FFMPEG/ffmpeg";
+		String pathFFmpeg = "ffmpeg";
 		
 
 		File fileOV = new File(original.getPath());
 		String pathSaveConvertedVideos = getPathToSaveFiles();
 		serviceConversion.execute(new Runnable() {
 			public void run() {
-				original.getAllConversions().forEach((originalV -> {
+				original.getConversions().forEach((originalV -> {
 					if (!originalV.isActive()) {
 						String command = getCommand(pathFFmpeg, fileOV, pathSaveConvertedVideos, originalV);
 						try {

@@ -17,8 +17,15 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Entity
-@Table(name = "original")
+@Table(name = "original", schema = "videotranscoding")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Original {
 	public interface Basic {
 	}
@@ -33,9 +40,9 @@ public class Original {
 	 * VideoConversion id
 	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@JsonView(Basic.class)
-	private long originalId;
+	private Integer id;
 	/**
 	 * Name of the video
 	 */
@@ -57,13 +64,14 @@ public class Original {
 	 * Filesize of the original Video
 	 */
 	@JsonView(Basic.class)
+	@Column(nullable = true)
 	private String fileSize;
 
 	/**
 	 * All Conversions of the video
 	 */
 	@JsonView(Details.class)
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER, mappedBy = "parent")
+	@OneToMany(mappedBy = "parent")
 	private List<Conversion> conversions = new ArrayList<>();
 
 	/**
@@ -79,11 +87,6 @@ public class Original {
 	
 	
 
-	/**
-	 * Constructor protected for hibernate.
-	 */
-	protected Original() {
-	}
 
 	/**
 	 * Constructor for the Original vide
@@ -120,49 +123,7 @@ public class Original {
 		return false;
 	}
 
-	public void setActive(boolean active) {
-		this.active = active;
-	}
 
-	public List<Conversion> getAllConversions() {
-		return conversions;
-	}
-
-	public void setComplete(boolean complete) {
-		this.complete = complete;
-	}
-
-	public String getUserVideo() {
-		return user;
-	}
-
-	public void setUserVideo(String userVideo) {
-		this.user = userVideo;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getPath() {
-		return path;
-	}
-
-	public void setPath(String path) {
-		this.path = path;
-	}
-
-	public void setAllConversions(List<Conversion> conversions) {
-		this.conversions = conversions;
-	}
-
-	public Long getOriginalId() {
-		return originalId;
-	}
 
 	public void removeConversion(Conversion c) {
 		this.conversions.remove(c);

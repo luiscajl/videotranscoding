@@ -27,7 +27,7 @@ public class ConversionServiceImpl implements ConversionService {
 		conversionRepository.save(video);
 	}
 
-	public Optional<Conversion> findOneConversion(long id) {
+	public Optional<Conversion> findOneConversion(Integer id) {
 		return conversionRepository.findById(id);
 	}
 
@@ -36,13 +36,13 @@ public class ConversionServiceImpl implements ConversionService {
 		fileUtilsService.deleteFile(conversion.getPath());
 		original.removeConversion(conversion);
 		originalService.save(original);
-		conversionRepository.deleteByconversionId(conversion.getConversionId());
+		conversionRepository.deleteById(conversion.getConversionId());
 		// } else {
 		// if (u.getListVideos().contains(original)) {
 		fileUtilsService.deleteFile(conversion.getPath());
 		original.removeConversion(conversion);
 		fileUtilsService.deleteFile(conversion.getPath());
-		conversionRepository.deleteByconversionId(conversion.getConversionId());
+		conversionRepository.deleteById(conversion.getConversionId());
 		// }
 		// }
 		return u;

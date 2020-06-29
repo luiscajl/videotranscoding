@@ -2,7 +2,7 @@ import { ConversionType } from './conversionType.model';
 import { Original } from './original.model';
 
 export interface Conversion {
-    conversionId: number;
+    id: number;
     name: string;
     fileSize: string;
     path: string;

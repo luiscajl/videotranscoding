@@ -23,13 +23,13 @@
       </div>
       <div>
         <ul class="list-group">
-          <li (click)="changeSource(originalVideo.originalId)" class="list-group-item" [style.cursor]="!canPlay(originalVideo) == true ? 'default' : 'pointer'" [style.color]="!canPlay(originalVideo) == true ? 'red' : null"
-            [class.active]="originalVideo.originalId == currentItemWatching.video.originalId">
+          <li (click)="changeSource(originalVideo.id)" class="list-group-item" [style.cursor]="!canPlay(originalVideo) == true ? 'default' : 'pointer'" [style.color]="!canPlay(originalVideo) == true ? 'red' : null"
+            [class.active]="originalVideo.id == currentItemWatching.video.id">
             <strong>Original: </strong>
             <a >{{originalVideo.name}}</a>
           </li>
-          <li *ngFor="let conversion of conversions" (click)="changeSource(conversion.conversionId)" [style.cursor]=" (getErrored(conversion) || !canPlay(conversion))== true ? 'default' : 'pointer'"
-            [style.color]="(getErrored(conversion) || !canPlay(conversion)) == true ? 'red' : null" [class.active]="conversion.conversionId == currentItemWatching.video.conversionId"
+          <li *ngFor="let conversion of conversions" (click)="changeSource(conversion.id)" [style.cursor]=" (getErrored(conversion) || !canPlay(conversion))== true ? 'default' : 'pointer'"
+            [style.color]="(getErrored(conversion) || !canPlay(conversion)) == true ? 'red' : null" [class.active]="conversion.id == currentItemWatching.video.id"
             class="list-group-item">
             <strong>Conversion: </strong>
             <a >{{ conversion.name }}</a>

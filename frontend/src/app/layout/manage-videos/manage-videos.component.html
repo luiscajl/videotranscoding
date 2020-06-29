@@ -19,9 +19,9 @@
                     <div class="col-sm-6">
                         <div class="btn-group-vertical btn-block">
                             <button (click)="deleteVideo(original)" type="button" class="btn btn-danger">Delete</button>
-                            <button [disabled]="!canPlay(original)" type="button" class="btn btn-success" (click)="watchVideo(original.originalId,original.originalId)">Watch</button>
-                            <button type="button" class="btn btn-info" (click)="downloadVideo(original.originalId)">Download</button>
-                            <button type="button" (click)="goToConversion(original.originalId)" class="btn btn-warning">Conversions</button>
+                            <button [disabled]="!canPlay(original)" type="button" class="btn btn-success" (click)="watchVideo(original.id,original.id)">Watch</button>
+                            <button type="button" class="btn btn-info" (click)="downloadVideo(original.id)">Download</button>
+                            <button type="button" (click)="goToConversion(original.id)" class="btn btn-warning">Conversions</button>
                         </div>
                     </div>
                     <hr>

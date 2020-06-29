@@ -84,7 +84,7 @@ public class VideoTranscodingFFmpegImplTest {
 		Conversion newVideo = new Conversion(ConversionType.MKV_H264360_COPY, video);
 		List<Conversion> lista = new ArrayList<>();
 		lista.add(newVideo);
-		video.setAllConversions(lista);
+		video.setConversions(lista);
 		originalService.save(video);
 		try {
 			transcoding.transcodeVideo(video);

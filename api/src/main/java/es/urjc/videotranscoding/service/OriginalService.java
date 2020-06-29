@@ -78,7 +78,7 @@ public interface OriginalService {
 	 * @param id for find the video
 	 * @return an optional that can contains the original or no.
 	 */
-	Original findOneVideo(long id, String user);
+	Original findOneVideo(Integer id, String user);
 
 	/**
 	 * Find one original Video
@@ -87,7 +87,7 @@ public interface OriginalService {
 	 * 
 	 * @return the optional with the video;
 	 */
-	Optional<Original> findOneVideoWithoutSecurity(long id);
+	Optional<Original> findOneVideoWithoutSecurity(Integer id);
 
 	/**
 	 * Pageable original videos

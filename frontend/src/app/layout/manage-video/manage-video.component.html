@@ -20,9 +20,9 @@
                     <div class="col-sm-6">
                         <div class="btn-group-vertical btn-block">
                             <button type="button" class="btn btn-danger">Delete Video</button>
-                            <button [disabled]="!canPlay(originalVideo)" (click)="watchVideo(originalVideo.originalId,originalVideo.originalId)" type="button"
+                            <button [disabled]="!canPlay(originalVideo)" (click)="watchVideo(originalVideo.id,originalVideo.id)" type="button"
                                 class="btn btn-success">Watch Video</button>
-                            <button (click)="downloadVideo(originalVideo.originalId)" type="button" class="btn btn-info">Download Video</button>
+                            <button (click)="downloadVideo(originalVideo.id)" type="button" class="btn btn-info">Download Video</button>
                         </div>
                     </div>
                     <hr>
@@ -50,9 +50,9 @@
                     <div class="col-sm-6" *ngIf="conversion.finished">
                         <div class="btn-group-vertical btn-block" >
                             <button type="button" class="btn btn-danger">Delete Video</button>
-                            <button [disabled]="getErrored(conversion) || !canPlay(conversion)" (click)="watchVideo(originalVideo.originalId,conversion.conversionId)"
+                            <button [disabled]="getErrored(conversion) || !canPlay(conversion)" (click)="watchVideo(originalVideo.id,conversion.id)"
                                 type="button" class="btn btn-success">Watch Video</button>
-                            <button [disabled]="getErrored(conversion)" (click)="downloadVideo(conversion.conversionId)" type="button" class="btn btn-info">Download Video</button>
+                            <button [disabled]="getErrored(conversion)" (click)="downloadVideo(conversion.id)" type="button" class="btn btn-info">Download Video</button>
                         </div>
                     </div>
                     <div class="col-sm-6" *ngIf="!conversion.finished">

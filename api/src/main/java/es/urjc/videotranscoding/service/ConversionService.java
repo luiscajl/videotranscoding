@@ -34,5 +34,5 @@ public interface ConversionService {
 	 *            for search the conversion
 	 * @return An optional with a conversion
 	 */
-	Optional<Conversion> findOneConversion(long id);
+	Optional<Conversion> findOneConversion(Integer id);
 }

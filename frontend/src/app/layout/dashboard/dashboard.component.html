@@ -16,7 +16,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr [class.table-danger]="getErrored(conversion)" [class.table-success]="conversion.finished" [class.table-warning]="conversion.conversionId == conversionOnProgress.conversionId"
+                            <tr [class.table-danger]="getErrored(conversion)" [class.table-success]="conversion.finished" [class.table-warning]="conversion.id == conversionOnProgress.id"
                                 *ngFor="let conversion of originalOnProgress.conversions">
                                 <td>{{conversion.name}}</td>
                                 <td>{{conversion.conversionType}}</td>
@@ -40,9 +40,9 @@
                 <div class="card-header">
                     <strong>Original Video - </strong>{{originalOnProgress.name}}
                     <br>
-                    <button [disabled]="!canPlay(originalOnProgress)" (click)="watchVideo(originalOnProgress.originalId,originalOnProgress.originalId)"
+                    <button [disabled]="!canPlay(originalOnProgress)" (click)="watchVideo(originalOnProgress.id,originalOnProgress.id)"
                         type="button" class="btn btn-sm btn-success">Watch</button>
-                    <button (click)="downloadVideo(originalOnProgress.originalId)" type="button" class="btn btn-sm btn-info">Download</button>
+                    <button (click)="downloadVideo(originalOnProgress.id)" type="button" class="btn btn-sm btn-info">Download</button>
                 </div>
                 <div class="card-body">
                     <div *ngFor="let conversion of originalOnProgress.conversions">
@@ -54,9 +54,9 @@
                                 <strong>Type: </strong>{{conversion.conversionType}}
                             </li>
                             <li class="list-group-item">
-                                <button [disabled]="!canPlay(conversion) || getErrored(conversion)" (click)="watchVideo(originalOnProgress.originalId,conversion.conversionId)"
+                                <button [disabled]="!canPlay(conversion) || getErrored(conversion)" (click)="watchVideo(originalOnProgress.id,conversion.id)"
                                     type="button" class="btn btn-sm btn-success">Watch</button>
-                                <button (click)="downloadVideo(conversion.conversionId)" type="button" class="btn btn-sm btn-info">Download</button>
+                                <button (click)="downloadVideo(conversion.id)" type="button" class="btn btn-sm btn-info">Download</button>
                             </li>
                             <hr>
                         </ul>

@@ -16,9 +16,9 @@ import { UserService } from '../../shared/services/user.service';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
     originalVideos: Array<Original> = [];
-    originalOnProgress: Original = { originalId: 0, name: "", path: "", userVideo: null, fileSize: "", conversions: null, complete: false, active: false };
+    originalOnProgress: Original = { id: 0, name: "", path: "", userVideo: null, fileSize: "", conversions: null, complete: false, active: false };
     conversionsConverted: Array<Conversion> = [];
-    conversionOnProgress: Conversion = { active: false, fileSize: "", finished: false, name: "", conversionId: 0, conversionType: null, parent: null, path: "", progress: "" };
+    conversionOnProgress: Conversion = { active: false, fileSize: "", finished: false, name: "", id: 0, conversionType: null, parent: null, path: "", progress: "" };
     onConversion: boolean = false;
     loading: boolean = false;
 
@@ -59,14 +59,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
         for (let element of this.originalVideos) {
             console.log("Comparando objeto: " + element.name + " y su valor es: " + element.active)
             if (element.active == true) {
-                // console.log("Conversion Activa: " + element.originalId)
+                // console.log("Conversion Activa: " + element.id)
                 this.originalOnProgress = element;
                 this.onConversion = true;
                 this.updateOnConversion();
                 return null;
             }
         }
-        if (this.originalOnProgress.originalId == 0) {
+        if (this.originalOnProgress.id == 0) {
             //this.ng4LoadingSpinnerService..hide();
             this.loading = false;
         }
@@ -78,7 +78,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
     updateOnConversion() {
         if (this.originalOnProgress.active) {
-            this.mediaService.getOriginalById(this.originalOnProgress.originalId).subscribe(
+            this.mediaService.getOriginalById(this.originalOnProgress.id).subscribe(
                 result => {
                     this.onConversion = true;
                     this.originalOnProgress = result;
@@ -109,7 +109,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
             this.interval = undefined;
             this.onConversion = false;
             this.loading = true;
-            this.originalOnProgress = { originalId: 0, name: "", path: "", userVideo: null, fileSize: "", conversions: null, complete: false, active: false };
+            this.originalOnProgress = { id: 0, name: "", path: "", userVideo: null, fileSize: "", conversions: null, complete: false, active: false };
             this.ngOnInit();
         }
 

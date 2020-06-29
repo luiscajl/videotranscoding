@@ -62,14 +62,14 @@ export class ManageVideosComponent implements OnInit {
         });
     }
   }
-  goToConversion(originalId: number) {
-    this.router.navigate(['/manage-video/' + originalId]);
+  goToConversion(id: number) {
+    this.router.navigate(['/manage-video/' + id]);
   }
   watchVideo(idRedirect: number, idWatchRedirect: number) {
     this.router.navigate(['/watch-video/' + idRedirect], { queryParams: { idWatch: idWatchRedirect } });
   }
-  downloadVideo(originalIdDownload: number) {
-    this.mediaService.downloadById(originalIdDownload);
+  downloadVideo(idDownload: number) {
+    this.mediaService.downloadById(idDownload);
   }
   canPlay(video: any): boolean {
     return this.mediaService.canPlayVideo(video);
@@ -78,7 +78,7 @@ export class ManageVideosComponent implements OnInit {
   deleteVideo(video: Original) {
     // this.ng4LoadingSpinnerService.show();
     this.mediaService.deleteVideo(
-      video.originalId).subscribe(
+      video.id).subscribe(
         result => {
           this.ngOnInit();
           console.log(result)

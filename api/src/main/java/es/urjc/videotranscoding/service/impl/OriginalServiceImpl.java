@@ -62,7 +62,7 @@ public class OriginalServiceImpl implements OriginalService {
 		originalVideoRepository.save(video);
 	}
 
-	public Original findOneVideo(long id, String u) {
+	public Original findOneVideo(Integer id, String u) {
 		// if (u.isAdmin()) {
 		Optional<Original> optionalOriginal = originalVideoRepository.findById(id);
 		if (optionalOriginal.isPresent()) {
@@ -109,12 +109,13 @@ public class OriginalServiceImpl implements OriginalService {
 				Conversion x = new Conversion(d, originalVideo);
 				conversionsVideo.add(x);
 			});
-			originalVideo.setAllConversions(conversionsVideo);
-			if (originalVideo.getAllConversions().isEmpty()) {
+			originalVideo.setConversions(conversionsVideo);
+			if (originalVideo.getConversions().isEmpty()) {
 				log.error(TRACE_NO_CONVERSION_TYPE_FOUND, new String[] { originalVideo.getName() }, null);
 				throw new FFmpegException(FFmpegException.EX_NO_CONVERSION_TYPE_FOUND,
 						List.of(originalVideo.getName()));
 			}
+			originalVideo.setFileSize("0");
 			originalVideoRepository.save(originalVideo);
 			return originalVideo;
 		} catch (FFmpegException e) {
@@ -149,7 +150,7 @@ public class OriginalServiceImpl implements OriginalService {
 				Conversion y = new Conversion(x, originalVideo);
 				conversionsVideo.add(y);
 			});
-			originalVideo.setAllConversions(conversionsVideo);
+			originalVideo.setConversions(conversionsVideo);
 			originalVideoRepository.save(originalVideo);
 			return originalVideo;
 		} catch (FFmpegException e) {
@@ -217,7 +218,7 @@ public class OriginalServiceImpl implements OriginalService {
 	}
 
 	@Override
-	public Optional<Original> findOneVideoWithoutSecurity(long id) {
+	public Optional<Original> findOneVideoWithoutSecurity(Integer id) {
 		return originalVideoRepository.findById(id);
 	}
 

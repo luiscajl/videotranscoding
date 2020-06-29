@@ -21,29 +21,29 @@ export interface CurrentItem {
 })
 export class WatchVideoComponent implements OnInit {
     conversions: Conversion[] = [];
-    originalVideo: Original = { active: false, complete: true, conversions: this.conversions, originalId: 0, fileSize: "2", name: "", path: "", userVideo: null };
+    originalVideo: Original = { active: false, complete: true, conversions: this.conversions, id: 0, fileSize: "2", name: "", path: "", userVideo: null };
     currentItemWatching: CurrentItem = { video: null, src: "" };
     api: VgAPI;
     canEvaluate: boolean;
-    originalIdRedirect: number;
+    idRedirect: number;
     @Input() watchId: number;
     constructor(private location: Location, private activatedRoute: ActivatedRoute, private mediaService: MediaService) {
         // this.ng4LoadingSpinnerService.show();
         this.watchId = activatedRoute.snapshot.queryParams['idWatch'];
-        this.originalIdRedirect = activatedRoute.snapshot.params['id'];
+        this.idRedirect = activatedRoute.snapshot.params['id'];
     }
     onPlayerReady(api: VgAPI) {
         this.api = api;
     }
     ngOnInit() {
-        if (this.originalIdRedirect == undefined) {
+        if (this.idRedirect == undefined) {
             //LANZAR NOT FOUND
             console.log("No se ha encontrado original ID, no has sido rederigido correctamente")
         }
         this.getOriginal();
     }
     getOriginal() {
-        this.mediaService.getOriginalById(this.originalIdRedirect).subscribe(
+        this.mediaService.getOriginalById(this.idRedirect).subscribe(
             result => {
                 this.originalVideo = result;
                 this.originalVideo.conversions.forEach(element => {
@@ -52,8 +52,8 @@ export class WatchVideoComponent implements OnInit {
                     }
 
                 });
-                if (this.watchId != this.originalVideo.originalId) {
-                    this.currentItemWatching.video = this.conversions.find(element => element.conversionId == this.watchId);
+                if (this.watchId != this.originalVideo.id) {
+                    this.currentItemWatching.video = this.conversions.find(element => element.id == this.watchId);
                 }
                 else {
                     this.currentItemWatching.video = result;
@@ -69,16 +69,16 @@ export class WatchVideoComponent implements OnInit {
         )
     }
     getVideoUrl(video: any) {
-        if (this.currentItemWatching.video.conversionId != undefined) {
-            return this.mediaService.watchById(this.currentItemWatching.video.conversionId);
+        if (this.currentItemWatching.video.id != undefined) {
+            return this.mediaService.watchById(this.currentItemWatching.video.id);
         }
         else {
-            return this.mediaService.watchById(this.currentItemWatching.video.originalId);
+            return this.mediaService.watchById(this.currentItemWatching.video.id);
         }
     }
-    changeSource(newConversionId: number): any {
-        if (newConversionId != this.originalVideo.originalId) {
-            let video = this.conversions.find(element => element.conversionId == newConversionId);
+    changeSource(newid: number): any {
+        if (newid != this.originalVideo.id) {
+            let video = this.conversions.find(element => element.id == newid);
             if (!this.getErrored(video) && this.canPlay(video))
                 this.currentItemWatching.video = video;
         }

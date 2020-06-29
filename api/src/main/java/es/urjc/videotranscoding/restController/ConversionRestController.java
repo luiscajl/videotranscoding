@@ -4,6 +4,8 @@ import java.security.Principal;
 import java.util.Arrays;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -119,7 +121,7 @@ public class ConversionRestController {
 	@PostMapping(value = "/expert")
 	// @ApiOperation(value = "Send the video for conversion expert with his
 	// conversion type")
-	// @JsonView(Details.class)
+	@JsonView(Details.class)
 	public ResponseEntity<Original> addConversionExpert(@RequestParam(value = "conversionType") List<String> params,
 			@RequestParam(value = "file") MultipartFile file, Principal principal) throws FFmpegException {
 		// User u = userService.findOneUser(principal.getName());
