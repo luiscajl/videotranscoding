@@ -5,20 +5,20 @@ CREATE TABLE if not EXISTS"videotranscoding"."original" (
   "name" varchar(255) NOT NULL,
   "path" varchar(255) UNIQUE NOT NULL,
   "user" varchar(255)  NOT NULL,
-"file_size" varchar(255) NOT NULL default '0',
+  "file_size" varchar(255) default '0',
   "complete" boolean NOT NULL DEFAULT false,
   "active" boolean NOT NULL DEFAULT false
 );
 CREATE TABLE if not exists "videotranscoding"."conversion" (
   "id" serial PRIMARY KEY,
   "original_id" int not null,
-    "name" varchar(255) NOT NULL,
-      "path" varchar(255) UNIQUE NOT NULL,
-      "progress" varchar(255) UNIQUE NOT NULL,
+  "name" varchar(255) NOT NULL,
+  "path" varchar(255) UNIQUE NOT NULL,
+  "progress" varchar(255)  NOT NULL,
   "finished" boolean NOT NULL DEFAULT false,
   "active" boolean NOT NULL DEFAULT false,
-  "file_size" varchar(255) NOT NULL default '0',
-"conversionType" varchar(255) NOT NULL
+  "file_size" varchar(255) default '0',
+  "conversion_type" varchar(255) NOT NULL
 );
 
 ALTER TABLE "videotranscoding"."conversion" ADD FOREIGN KEY ("original_id") REFERENCES "videotranscoding"."original" ("id");
